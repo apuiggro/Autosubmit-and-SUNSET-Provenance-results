@@ -1,0 +1,8 @@
+[CRITICAL] 2025-02-11 11:24:11,825 On Configuration files:
+Critical Issues on [Jobs] config file:
+[TRANSFER_RECIPES] FILE autosubmit/auto-transfer_recipes.sh doesn't exist and check parameter is not set on_submission value
+[VERIFICATION] FILE autosubmit/auto-verification.sh doesn't exist and check parameter is not set on_submission value
+[SCORECARDS] FILE autosubmit/auto-scorecards.sh doesn't exist and check parameter is not set on_submission value
+[TRANSFER_RESULTS] FILE autosubmit/auto-transfer_results.sh doesn't exist and check parameter is not set on_submission value
+[TRANSFER_PROVENANCE] FILE autosubmit/auto-transfer_provenance.sh doesn't exist and check parameter is not set on_submission value
+ [eCode=7014]

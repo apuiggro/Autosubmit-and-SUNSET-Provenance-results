@@ -1,0 +1,15 @@
+config:
+  EXPID: a8hn
+  AUTOSUBMIT_VERSION: 4.1.11
+  MAXWAITINGJOBS: 16
+  TOTALJOBS: 16
+  SAFETYSLEEPTIME: 10
+  RETRIALS: 0
+mail:
+  NOTIFICATIONS: 'False'
+  TO: albert.puiggros@bsc.es
+communications:
+  API: paramiko
+storage:
+  TYPE: pkl
+  COPY_REMOTE_LOGS: 'True'

@@ -1,0 +1,6 @@
+common:
+  MODULES: MODULES
+  OUTDIR: /esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138
+  SCRIPT: ./use_cases/ex1_4_provenance_autosubmit/ex1_4-script.R
+  RECIPE: ex1_4-recipe.yml
+  TMPDIR: /gpfs/scratch/bsc32/bsc032533/tmp/

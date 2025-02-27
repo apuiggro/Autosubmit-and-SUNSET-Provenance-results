@@ -1,0 +1,30 @@
+DEFAULT:
+  EXPID: a8hn
+  HPCARCH: mn5
+experiment:
+  DATELIST: '20250211'
+  MEMBERS: fc0
+  CHUNKSIZEUNIT: month
+  CHUNKSIZE: 1
+  NUMCHUNKS: 3
+  CHUNKINI: 1
+  CALENDAR: standard
+project:
+  PROJECT_TYPE: local
+  PROJECT_DESTINATION: auto-s2s
+git:
+  PROJECT_ORIGIN: https://earth.bsc.es/gitlab/es/auto-s2s.git
+  PROJECT_BRANCH: master
+  PROJECT_COMMIT: ''
+svn:
+  PROJECT_URL: ''
+  PROJECT_REVISION: ''
+local:
+  PROJECT_PATH: /esarchive/scratch/apuiggro/sunset_MR/sunset
+project_files:
+  FILE_PROJECT_CONF: ''
+  FILE_JOBS_CONF: ''
+  JOB_SCRIPTS_TYPE: ''
+rerun:
+  RERUN: no
+  CHUNKLIST: ''

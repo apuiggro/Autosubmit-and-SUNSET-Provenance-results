@@ -1,0 +1,224 @@
+{
+	"@context": {
+		"ds": "http://www.metaclip.org/datasource/datasource.owl#",
+		"ipcc": "http://www.metaclip.org/ipcc_terms/ipcc_terms.owl#",
+		"veri": "http://www.metaclip.org/verification/verification.owl#",
+		"cal": "http://www.metaclip.org/calibration/calibration.owl#",
+		"go": "http://www.metaclip.org/graphical_output/graphical_output.owl#",
+		"prov": "http://www.w3.org/ns/prov#",
+		"rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+		"dc": "http://www.w3.org/2002/07/owl",
+		"skos": "http://www.w3.org/2004/02/skos/core#"
+	},
+	"@graph":[{
+	"@id":  "#Dataset_hcst",
+	"@type": "ds:SeasonalHindcast",
+	"rdfs:label": "Dataset",
+"dc:description": "Seasonal Hindcast",
+"ds:hadMember": "25"
+,
+"ds:hadModellingCenter": {
+	"@id":  "ds:ECMWF",
+	"@type": "ds:ModellingCenter",
+	"rdfs:label": "ECMWF",
+"dc:title": "European Centre for Medium-Range Weather Forecasts"},
+"prov:atLocation": {
+	"@id":  "#Location_Dataset_hcst_1",
+	"@type": "prov:Location",
+	"rdfs:label": "exp/ecmwf/system51c3s/monthly_mean/tas_f6h/",
+"dc:description": "Barcelona 
+                                      Supercommputing Center Earth 
+                                      Science Department
+                                      local repository. More information 
+                                      about the datasets can be found 
+                                      in SUNSETs
+                                      configuration files.",
+"prov:value": "exp/ecmwf/system51c3s/monthly_mean/tas_f6h/",
+"prov:atTime": "2025-02-11 11:39:34"},
+"ds:hadDatasetSubset": {
+	"@id":  "#DatasetSubset_hcst",
+	"@type": "ds:DatasetSubset",
+	"rdfs:label": "DatasetSubset"
+,
+"prov:atLocation": {
+	"@id":  "#Location_Datasubset_hcst",
+	"@type": "prov:Location",
+	"rdfs:label": "hcst directories",
+"dc:description": "Barcelona 
+                                     Supercommputing Center Earth 
+                                     Science Department
+                                     local repository. More information 
+                                     about the datasets can be found 
+                                     at SUNSETs
+                                     configuration files.",
+"prov:value": "/gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_19930201.nc /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_19940201.nc /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_19950201.nc /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_19960201.nc /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_19970201.nc /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_19980201.nc /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_19990201.nc /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_20000201.nc /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_20010201.nc /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_20020201.nc /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_20030201.nc",
+"prov:atTime": "2025-02-11 11:39:34"},
+"ds:hasVariable": {
+	"@id":  "#Variable_hcst",
+	"@type": "ds:Variable",
+	"rdfs:label": "tas",
+"ds:withUnits": "K",
+"ds:hasLongName": "Near-Surface Air Temperature",
+"ds:TemporalResolution": "monthly_mean"},
+"ds:hasHorizontalExtent": {
+	"@id":  "#SpatialExtent_DatasetSubset_hcst_tas",
+	"@type": "ds:HorizontalExtent",
+	"rdfs:label": "SpatialExtent",
+"ds:withUnits": "X:degrees_north   Y:degrees_east   ",
+"ds:xmin": "0.5",
+"ds:xmax": "359.5",
+"ds:ymin": "-89.5",
+"ds:ymax": "89.5",
+"ds:hasHorizontalResX": "1",
+"ds:hasHorizontalResY": "1"},
+"ds:hasValidTemporalExtent": {
+	"@id":  "#TemporalPeriod_hcst",
+	"@type": "ds:TemporalPeriod",
+	"rdfs:label": "TemporalPeriod",
+"prov:startedAtTime": "1993-02-15 UTC 1994-02-15 UTC 1995-02-15 UTC 1996-02-15 UTC 1997-02-15 UTC 1998-02-15 UTC 1999-02-15 UTC 2000-02-15 UTC 2001-02-15 UTC 2002-02-15 UTC 2003-02-15 UTC",
+"prov:endedAtTime": "1993-07-16 UTC 1994-07-16 UTC 1995-07-16 UTC 1996-07-16 UTC 1997-07-16 UTC 1998-07-16 UTC 1999-07-16 UTC 2000-07-16 UTC 2001-07-16 UTC 2002-07-16 UTC 2003-07-16 UTC",
+"ds:hasTimeFrequency": "Monthly Mean"},
+"ds:hadCommandCall": [{
+	"@id":  "#Command_Loading2.0.0",
+	"@type": "ds:Command",
+	"rdfs:label": "modules/Loading/Loading.R",
+"prov:value": "modules/Loading/Loading.R",
+"prov:atTime": "2025-02-11 11:39:35"
+,
+"ds:fromPackage": {
+	"@id":  "#Package_Loading",
+	"@type": "ds:Package",
+	"rdfs:label": "Loading",
+"ds:referenceURL": "https://earth.bsc.es/gitlab/
+                                          es/sunset/",
+"dc:comment": " SUNSET (SUbseasoNal 
+                                        to decadal climate forecast 
+                                        post-processIng and asSEmenT suite) is
+                                        a modular tool for subseasonal 
+                                        to seasonal to decadal forecast 
+                                        verification workflows. It is 
+                                        intended to have a modularized 
+                                        structure, where each module is a 
+                                        separate part of the code that 
+                                        performs a  specific task, so that 
+                                        parts of the workflow can be 
+                                        skipped or reordered. Each command call 
+                                        node corresponds to one of SUNSET's 
+                                        modules execution",
+"ds:hasSoftwareVersion": "2.0.0",
+"dc:isDefinedBy": "SUNSET"}},{	"@id":  "#Command_Loading2.0.0"
+}]}}
+,{
+	"@id":  "#Dataset_obs",
+	"@type": "ds:Reanalysis",
+	"rdfs:label": "Dataset",
+"ds:hadMember": "1"
+,
+"ds:hadModellingCenter": {
+	"@id":  "ds:ERA5",
+	"@type": "ds:ModellingCenter",
+	"rdfs:label": "ERA5",
+"dc:title": "European Centre for Medium-Range Weather Forecasts"},
+"prov:atLocation": {
+	"@id":  "#Location_Dataset_obs_1",
+	"@type": "prov:Location",
+	"rdfs:label": "monthly_mean/tas_f1h-r1440x721cds/",
+"dc:description": "Barcelona 
+                                      Supercommputing Center Earth 
+                                      Science Department
+                                      local repository. More information 
+                                      about the datasets can be found 
+                                      in SUNSETs
+                                      configuration files.",
+"prov:value": "monthly_mean/tas_f1h-r1440x721cds/",
+"prov:atTime": "2025-02-11 11:39:34"},
+"ds:hadDatasetSubset": {
+	"@id":  "#DatasetSubset_obs",
+	"@type": "ds:DatasetSubset",
+	"rdfs:label": "DatasetSubset"
+,
+"prov:atLocation": {
+	"@id":  "#Location_Datasubset_obs",
+	"@type": "prov:Location",
+	"rdfs:label": "obs directories",
+"dc:description": "Barcelona 
+                                     Supercommputing Center Earth 
+                                     Science Department
+                                     local repository. More information 
+                                     about the datasets can be found 
+                                     at SUNSETs
+                                     configuration files.",
+"prov:value": "/gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199302.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199402.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199502.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199602.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199702.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199802.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199902.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200002.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200102.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200202.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200302.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199303.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199403.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199503.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199603.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199703.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199803.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199903.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200003.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200103.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200203.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200303.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199304.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199404.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199504.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199604.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199704.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199804.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199904.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200004.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200104.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200204.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200304.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199305.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199405.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199505.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199605.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199705.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199805.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199905.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200005.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200105.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200205.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200305.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199306.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199406.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199506.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199606.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199706.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199806.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199906.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200006.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200106.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200206.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200306.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199307.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199407.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199507.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199607.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199707.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199807.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_199907.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200007.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200107.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200207.nc /gpfs/projects/bsc32/esarchive_cache/recon/ecmwf/era5/monthly_mean/tas_f1h-r1440x721cds/tas_200307.nc",
+"prov:atTime": "2025-02-11 11:39:34"},
+"ds:hasVariable": {
+	"@id":  "#Variable_obs",
+	"@type": "ds:Variable",
+	"rdfs:label": "tas",
+"ds:withUnits": "K",
+"ds:hasLongName": "Near-Surface Air Temperature",
+"ds:TemporalResolution": "monthly_mean"},
+"ds:hasHorizontalExtent": {
+	"@id":  "#SpatialExtent_DatasetSubset_obs_tas",
+	"@type": "ds:HorizontalExtent",
+	"rdfs:label": "SpatialExtent",
+"ds:withUnits": "X:degrees_north   Y:degrees_east   ",
+"ds:xmin": "0.5",
+"ds:xmax": "359.5",
+"ds:ymin": "-89.5",
+"ds:ymax": "89.5",
+"ds:hasHorizontalResX": "1",
+"ds:hasHorizontalResY": "1"},
+"ds:hasValidTemporalExtent": {
+	"@id":  "#TemporalPeriod_obs",
+	"@type": "ds:TemporalPeriod",
+	"rdfs:label": "TemporalPeriod",
+"prov:startedAtTime": "1993-02-14 UTC 1994-02-14 UTC 1995-02-14 UTC 1996-02-14 UTC 1997-02-14 UTC 1998-02-14 UTC 1999-02-14 UTC 2000-02-14 UTC 2001-02-14 UTC 2002-02-14 UTC 2003-02-14 UTC",
+"prov:endedAtTime": "1993-07-15 UTC 1994-07-15 UTC 1995-07-15 UTC 1996-07-15 UTC 1997-07-15 UTC 1998-07-15 UTC 1999-07-15 UTC 2000-07-15 UTC 2001-07-15 UTC 2002-07-15 UTC 2003-07-15 UTC",
+"ds:hasTimeFrequency": "Monthly Mean"},
+"ds:hadInterpolation": {
+	"@id":  "#Interpolation_obs",
+	"@type": "ds:Interpolation",
+	"rdfs:label": "Bilinear interpolation",
+"dc:description": "Interpolation to 
+                              system, either to forecast or hindcast grid."
+,
+"ds:hadInterpolationMethod": {
+	"@id":  "#InterpolationMethod_obs",
+	"@type": "ds:BilinearInterpolation",
+	"rdfs:label": "Bilinear"},
+"ds:usedReferenceCoordinates": {
+	"@id":  "#SpatialExtent_Reggriding_hcst_tas",
+	"@type": "ds:HorizontalExtent",
+	"rdfs:label": "SpatialExtent",
+"ds:withUnits": "X:degrees_north   Y:degrees_east   ",
+"ds:xmin": "0.5",
+"ds:xmax": "359.5",
+"ds:ymin": "-89.5",
+"ds:ymax": "89.5",
+"ds:hasHorizontalResX": "1",
+"ds:hasHorizontalResY": "1"},
+"ds:hadCommandCall": {	"@id":  "#Command_Loading2.0.0"
+}},
+"ds:hadCommandCall": {	"@id":  "#Command_Loading2.0.0"
+}}}
+,{
+	"@id":  "#Argument_Recipe_Loading",
+	"@type": "ds:Argument",
+	"rdfs:label": "Recipe",
+"dc:description": "User-defined configuration file",
+"prov:AtLocation": "/gpfs/scratch/bsc32/bsc032533/tmp//ex1_4-recipe_20250211112138"
+,
+"ds:usedArgument": {	"@id":  "#Command_Loading2.0.0"
+}}
+,{
+	"@id":  "#Argument_Data_Loading",
+	"@type": "ds:Argument",
+	"rdfs:label": "Data",
+"dc:description": "s2dv_cube object",
+"ds:referenceURL": "https://cran.r-project.org/
+                                      web/packages/s2dv/index.html",
+"dc:comment": "output s2dv_cube object 
+                                      from previous module"
+,
+"ds:usedArgument": {	"@id":  "#Command_Loading2.0.0"
+}}]}

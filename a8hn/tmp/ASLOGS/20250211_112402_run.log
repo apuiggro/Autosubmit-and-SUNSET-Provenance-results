@@ -1,0 +1,45 @@
+2025-02-11 11:24:11,352 Autosubmit is running with 4.1.11
+2025-02-11 11:24:11,354 Preparing run
+2025-02-11 11:24:11,356 
+Checking configuration files...
+2025-02-11 11:24:11,402 Expdef config file is correct
+2025-02-11 11:24:11,402 Platforms sections: OK
+2025-02-11 11:24:11,405 Autosubmit general sections OK
+2025-02-11 11:24:11,824 Traceback (most recent call last):
+  File "/shared/earth/easybuild/rocky/8.4/x86_64/software/autosubmit/4.1.11-foss-2021b-Python-3.9.6/lib/python3.9/site-packages/autosubmitconfigparser/config/configcommon.py", line 1128, in check_conf_files
+    result = self.show_messages()
+  File "/shared/earth/easybuild/rocky/8.4/x86_64/software/autosubmit/4.1.11-foss-2021b-Python-3.9.6/lib/python3.9/site-packages/autosubmitconfigparser/config/configcommon.py", line 455, in show_messages
+    raise AutosubmitCritical(message, 7014)
+log.log.AutosubmitCritical:  
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/shared/earth/easybuild/rocky/8.4/x86_64/software/autosubmit/4.1.11-foss-2021b-Python-3.9.6/lib/python3.9/site-packages/autosubmit/autosubmit.py", line 2197, in run_experiment
+    job_list, submitter , exp_history, host , as_conf, platforms_to_test, packages_persistence, _ = Autosubmit.prepare_run(expid, notransitive, start_time, start_after, run_only_members)
+  File "/shared/earth/easybuild/rocky/8.4/x86_64/software/autosubmit/4.1.11-foss-2021b-Python-3.9.6/lib/python3.9/site-packages/autosubmit/autosubmit.py", line 2000, in prepare_run
+    as_conf.check_conf_files(running_time=True, force_load=True)
+  File "/shared/earth/easybuild/rocky/8.4/x86_64/software/autosubmit/4.1.11-foss-2021b-Python-3.9.6/lib/python3.9/site-packages/autosubmitconfigparser/config/configcommon.py", line 1133, in check_conf_files
+    raise AutosubmitCritical(e.message, e.code, e.trace)
+log.log.AutosubmitCritical:  
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/shared/earth/easybuild/rocky/8.4/x86_64/software/autosubmit/4.1.11-foss-2021b-Python-3.9.6/bin/autosubmit", line 36, in main
+    return_value = Autosubmit.parse_args()
+  File "/shared/earth/easybuild/rocky/8.4/x86_64/software/autosubmit/4.1.11-foss-2021b-Python-3.9.6/lib/python3.9/site-packages/autosubmit/autosubmit.py", line 711, in parse_args
+    return Autosubmit.run_experiment(args.expid, args.notransitive,args.start_time,args.start_after, args.run_only_members, args.profile)
+  File "/shared/earth/easybuild/rocky/8.4/x86_64/software/autosubmit/4.1.11-foss-2021b-Python-3.9.6/lib/python3.9/site-packages/autosubmit/autosubmit.py", line 2200, in run_experiment
+    raise AutosubmitCritical(e.message, 7014, e.trace)
+log.log.AutosubmitCritical:  
+
+[CRITICAL] 2025-02-11 11:24:11,825 On Configuration files:
+Critical Issues on [Jobs] config file:
+[TRANSFER_RECIPES] FILE autosubmit/auto-transfer_recipes.sh doesn't exist and check parameter is not set on_submission value
+[VERIFICATION] FILE autosubmit/auto-verification.sh doesn't exist and check parameter is not set on_submission value
+[SCORECARDS] FILE autosubmit/auto-scorecards.sh doesn't exist and check parameter is not set on_submission value
+[TRANSFER_RESULTS] FILE autosubmit/auto-transfer_results.sh doesn't exist and check parameter is not set on_submission value
+[TRANSFER_PROVENANCE] FILE autosubmit/auto-transfer_provenance.sh doesn't exist and check parameter is not set on_submission value
+ [eCode=7014]
+2025-02-11 11:24:11,825 More info at https://autosubmit.readthedocs.io/en/master/troubleshooting/error-codes.html

@@ -1,0 +1,45 @@
+JOBS:
+  transfer_recipes:
+    FILE: autosubmit/auto-transfer_recipes.sh
+    RUNNING: once
+    WALLCLOCK: '00:10'
+    PLATFORM: transfer
+    NOTIFY_ON: ''
+    PROCESSORS: 1
+    TASKS: 1
+  verification:
+    FILE: autosubmit/auto-verification.sh
+    RUNNING: chunk
+    WALLCLOCK: '03:00'
+    NOTIFY_ON: ''
+    PLATFORM: mn5
+    PROCESSORS: 4
+    TASKS: 1
+    CUSTOM_DIRECTIVES: '#SBATCH --exclusive'
+    DEPENDENCIES: transfer_recipes
+  scorecards:
+    FILE: autosubmit/auto-scorecards.sh
+    WALLCLOCK: '00:10'
+    PLATFORM: mn5
+    NOTIFY_ON: ''
+    PROCESSORS: 1
+    TASKS: 1
+    DEPENDENCIES: verification
+  transfer_results:
+    FILE: autosubmit/auto-transfer_results.sh
+    RUNNING: once
+    WALLCLOCK: '00:10'
+    PLATFORM: transfer
+    NOTIFY_ON: ''
+    PROCESSORS: 1
+    TASKS: 1
+    DEPENDENCIES: scorecards
+  transfer_provenance:
+    FILE: autosubmit/auto-transfer_provenance.sh
+    RUNNING: once
+    WALLCLOCK: '00:10'
+    PLATFORM: transfer
+    NOTIFY_ON: ''
+    PROCESSORS: 1
+    TASKS: 1
+    DEPENDENCIES: transfer_results

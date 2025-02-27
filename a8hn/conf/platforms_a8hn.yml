@@ -1,0 +1,15 @@
+Platforms:
+  mn5:
+    TYPE: slurm
+    HOST: glogin1.bsc.es
+    PROJECT: bsc32
+    USER: bsc032533
+    QUEUE: gp_bsces
+    SCRATCH_DIR: /gpfs/scratch/
+    TEMP_DIR: ''
+  transfer:
+    TYPE: slurm
+    HOST: transfer2.bsc.es
+    PROJECT: bsc32
+    SCRATCH_DIR: /gpfs/scratch/
+    USER: bsc032533

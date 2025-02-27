@@ -1,0 +1,7 @@
+
+Job Name                           Job Id         Job Status     Job Platform        Job Queue      
+a8hn_20250211_fc0_2_VERIFICATION   15497750       COMPLETED      MN5                 gp_bsces       
+a8hn_20250211_fc0_3_VERIFICATION   15497751       COMPLETED      MN5                 gp_bsces       
+a8hn_SCORECARDS                    15499584       COMPLETED      MN5                 gp_bsces       
+a8hn_TRANSFER_RESULTS              3146633        COMPLETED      TRANSFER                           
+a8hn_TRANSFER_PROVENANCE           3146634        COMPLETED      TRANSFER                           

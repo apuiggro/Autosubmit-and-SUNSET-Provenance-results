@@ -1,0 +1,61 @@
+[INFO] JOBID=3146633
+
+job_name_ptrn='/gpfs/scratch/bsc32/bsc032533/a8hn/LOG_a8hn/a8hn_TRANSFER_RESULTS'
++ job_name_ptrn=/gpfs/scratch/bsc32/bsc032533/a8hn/LOG_a8hn/a8hn_TRANSFER_RESULTS
+echo $(date +%s) > ${job_name_ptrn}_STAT
+++ date +%s
++ echo 1739272381
+
+################### 
+# AS CHECKPOINT FUNCTION
+###################
+# Creates a new checkpoint file upon call based on the current numbers of calls to the function
+
+AS_CHECKPOINT_CALLS=0
++ AS_CHECKPOINT_CALLS=0
+function as_checkpoint {
+    AS_CHECKPOINT_CALLS=$((AS_CHECKPOINT_CALLS+1))
+    touch ${job_name_ptrn}_CHECKPOINT_${AS_CHECKPOINT_CALLS}
+}
+
+###################
+# Autosubmit job
+###################
+
+#!/bin/bash
+
+############ AUTOSUBMIT INPUTS ############
+proj_dir=/esarchive/autosubmit/a8hn/proj/auto-s2s
++ proj_dir=/esarchive/autosubmit/a8hn/proj/auto-s2s
+outdir=/esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138
++ outdir=/esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138
+tmpdir=/gpfs/scratch/bsc32/bsc032533/tmp/
++ tmpdir=/gpfs/scratch/bsc32/bsc032533/tmp/
+###############################
+
+srcdir=${tmpdir}/$(basename ${outdir})
+++ basename /esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138
++ srcdir=/gpfs/scratch/bsc32/bsc032533/tmp//ex1_4-recipe_20250211112138
+
+cp -r ${srcdir}/* /gpfs/archive/bsc32/${outdir}
++ cp -r /gpfs/scratch/bsc32/bsc032533/tmp//ex1_4-recipe_20250211112138/logs /gpfs/scratch/bsc32/bsc032533/tmp//ex1_4-recipe_20250211112138/outputs /gpfs/scratch/bsc32/bsc032533/tmp//ex1_4-recipe_20250211112138/plots /gpfs/archive/bsc32//esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138
+
+rm -r $srcdir
++ rm -r /gpfs/scratch/bsc32/bsc032533/tmp//ex1_4-recipe_20250211112138
+
+rm -r ${tmpdir}/sunset/$(basename ${outdir})/
+++ basename /esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138
++ rm -r /gpfs/scratch/bsc32/bsc032533/tmp//sunset/ex1_4-recipe_20250211112138/
+
+###################
+# Autosubmit tailer
+###################
+set -xuve
++ set -xuve
+echo $(date +%s) >> ${job_name_ptrn}_STAT
+++ date +%s
++ echo 1739272401
+touch ${job_name_ptrn}_COMPLETED
++ touch /gpfs/scratch/bsc32/bsc032533/a8hn/LOG_a8hn/a8hn_TRANSFER_RESULTS_COMPLETED
+exit 0
++ exit 0

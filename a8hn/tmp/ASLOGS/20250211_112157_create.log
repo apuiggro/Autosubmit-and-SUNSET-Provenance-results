@@ -1,0 +1,55 @@
+2025-02-11 11:22:05,417 Autosubmit is running with 4.1.11
+2025-02-11 11:22:05,419 Preparing .lock file to avoid multiple instances with same expid.
+2025-02-11 11:22:05,471 Using project folder: /esarchive/autosubmit/a8hn/proj
+2025-02-11 11:22:05,471 
+Checking configuration files...
+2025-02-11 11:22:05,513 Expdef config file is correct
+2025-02-11 11:22:05,514 Platforms sections: OK
+2025-02-11 11:22:05,514 Jobs sections OK
+2025-02-11 11:22:05,514 Autosubmit general sections OK
+2025-02-11 11:22:05,514 Configuration files OK
+
+2025-02-11 11:22:05,515 Loading parameters...
+2025-02-11 11:22:05,533 
+Creating the jobs list...
+2025-02-11 11:22:05,534 Loading JobList
+[WARNING] 2025-02-11 11:22:05,535 File /esarchive/autosubmit/a8hn/pkl/job_list_a8hn.pkl does not exist. 
+2025-02-11 11:22:05,535 Autosubmit will use a backup to recover the job_list
+[WARNING] 2025-02-11 11:22:05,535 File /esarchive/autosubmit/a8hn/pkl/job_list_a8hn_backup.pkl does not exist. 
+[WARNING] 2025-02-11 11:22:05,535 Joblist will be created from scratch due: [Errno 2] No such file or directory: '/esarchive/autosubmit/a8hn/pkl/job_list_a8hn_backup.pkl'
+2025-02-11 11:22:05,536 Creating jobs...
+2025-02-11 11:22:05,536 Creating TRANSFER_RECIPES jobs
+2025-02-11 11:22:05,536 Creating VERIFICATION jobs
+2025-02-11 11:22:05,536 Creating SCORECARDS jobs
+2025-02-11 11:22:05,537 Creating TRANSFER_RESULTS jobs
+2025-02-11 11:22:05,537 Creating TRANSFER_PROVENANCE jobs
+2025-02-11 11:22:05,537 Adding dependencies to the graph..
+2025-02-11 11:22:05,537 Changes detected, calculating dependencies
+2025-02-11 11:22:05,537 Adding dependencies for TRANSFER_RECIPES jobs
+2025-02-11 11:22:05,537 Adding dependencies for VERIFICATION jobs
+2025-02-11 11:22:05,537 Adding dependencies for SCORECARDS jobs
+2025-02-11 11:22:05,537 Adding dependencies for TRANSFER_RESULTS jobs
+2025-02-11 11:22:05,538 Adding dependencies for TRANSFER_PROVENANCE jobs
+2025-02-11 11:22:05,538 Adding dependencies to the job..
+2025-02-11 11:22:05,538 Transitive reduction...
+2025-02-11 11:22:05,628 Looking for edgeless jobs...
+2025-02-11 11:22:05,689 
+Saving the jobs list...
+2025-02-11 11:22:05,694 Saving JobList: /esarchive/autosubmit/a8hn/pkl/job_list_a8hn.pkl.tmp
+2025-02-11 11:22:05,717 JobList saved in /esarchive/autosubmit/a8hn/pkl/job_list_a8hn.pkl
+2025-02-11 11:22:06,137 Backing up jobs_data...
+2025-02-11 11:22:06,228 Jobs_data database backup completed.
+2025-02-11 11:22:06,228 
+Plotting the jobs list...
+2025-02-11 11:22:06,229 Plotting...
+2025-02-11 11:22:06,229 Creating workflow graph...
+2025-02-11 11:22:06,233 Creating legend...
+2025-02-11 11:22:06,235 Creating job graph...
+2025-02-11 11:22:06,239 Graph definition finalized
+2025-02-11 11:22:06,239 Saving workflow plot at '/esarchive/autosubmit/a8hn/plot/a8hn_20250211_1122.pdf'
+2025-02-11 11:22:12,156 Plot created at /esarchive/autosubmit/a8hn/plot/a8hn_20250211_1122.pdf
+2025-02-11 11:22:12,156 Writing status txt...
+2025-02-11 11:22:12,159 Status txt created at <_io.TextIOWrapper name='/esarchive/autosubmit/a8hn/status/a8hn_20250211_1122.txt' mode='w+' encoding='UTF-8'>
+2025-02-11 11:22:24,915 
+Job list created successfully
+[WARNING] 2025-02-11 11:22:24,916 Remember to MODIFY the MODEL config files!

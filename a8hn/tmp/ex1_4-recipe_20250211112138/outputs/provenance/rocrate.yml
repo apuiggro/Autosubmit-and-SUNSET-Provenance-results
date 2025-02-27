@@ -1,0 +1,64 @@
+ROCRATE:
+  INPUTS: []
+  OUTPUTS:
+  - '*/*.gif'
+  - file:///tmp/ex1_4-recipe_20250211112138/outputs/provenance/main_provenance_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0101.json
+  - file:///tmp/ex1_4-recipe_20250211112138/logs/recipes/atomic_recipe_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0101.yml
+  - file:///tmp/ex1_4-recipe_20250211112138/outputs/provenance/main_provenance_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0201.json
+  - file:///tmp/ex1_4-recipe_20250211112138/logs/recipes/atomic_recipe_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0201.yml
+  - file:///tmp/ex1_4-recipe_20250211112138/outputs/provenance/main_provenance_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0301.json
+  - file:///tmp/ex1_4-recipe_20250211112138/logs/recipes/atomic_recipe_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0301.yml
+  PATCH: |-
+    {
+      "@graph": [
+        {
+          "@id": "./",
+          "license": "Apache-2.0",
+          "creator": {
+            "@id": "https://orcid.org/0009-0006-0707-6448"
+          }
+        },
+        {
+          "@id": "https://orcid.org/0009-0006-0707-6448",
+          "@type": "Person",
+          "affiliation": {
+            "@id": "https://ror.org/05sd8tv96"
+          }
+        },
+        {
+          "@id": "#metaclip-create-action",
+          "@type": "CreateAction",
+          "instrument": {
+            "@id": "file:///esarchive/scratch/apuiggro/sunset_MR/sunset"
+          },
+          "name": "Compute Skills and Plot Scorecards with SUNSET +  METACLIP-based provenance",
+          "description": "SUNSET provenance based on METACLIP",
+          "isPartOf": {
+            "@id": "#create-action"
+          },
+          "endTime": "2025-02-11 11:21",
+          "object": [
+            {
+              "@id": "/tmp/ex1_4-recipe_20250211112138/logs/recipes/atomic_recipe_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0101.yml"
+            },
+            {
+              "@id": "/tmp/ex1_4-recipe_20250211112138/logs/recipes/atomic_recipe_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0201.yml"
+            },
+            {
+              "@id": "/tmp/ex1_4-recipe_20250211112138/logs/recipes/atomic_recipe_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0301.yml"
+            }
+          ],
+          "result": [
+            {
+              "@id": "/tmp/ex1_4-recipe_20250211112138/outputs/provenance/main_provenance_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0101.json"
+            },
+            {
+              "@id": "/tmp/ex1_4-recipe_20250211112138/outputs/provenance/main_provenance_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0201.json"
+            },
+            {
+              "@id": "/tmp/ex1_4-recipe_20250211112138/outputs/provenance/main_provenance_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0301.json"
+            }
+          ]
+        }
+      ]
+    }

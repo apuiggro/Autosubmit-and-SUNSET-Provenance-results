@@ -1,0 +1,73 @@
+[INFO] JOBID=3146634
+
+job_name_ptrn='/gpfs/scratch/bsc32/bsc032533/a8hn/LOG_a8hn/a8hn_TRANSFER_PROVENANCE'
++ job_name_ptrn=/gpfs/scratch/bsc32/bsc032533/a8hn/LOG_a8hn/a8hn_TRANSFER_PROVENANCE
+echo $(date +%s) > ${job_name_ptrn}_STAT
+++ date +%s
++ echo 1739272413
+
+################### 
+# AS CHECKPOINT FUNCTION
+###################
+# Creates a new checkpoint file upon call based on the current numbers of calls to the function
+
+AS_CHECKPOINT_CALLS=0
++ AS_CHECKPOINT_CALLS=0
+function as_checkpoint {
+    AS_CHECKPOINT_CALLS=$((AS_CHECKPOINT_CALLS+1))
+    touch ${job_name_ptrn}_CHECKPOINT_${AS_CHECKPOINT_CALLS}
+}
+
+###################
+# Autosubmit job
+###################
+
+#!/bin/bash
+
+############ AUTOSUBMIT INPUTS ############
+outdir=/esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138
++ outdir=/esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138
+expid=a8hn
++ expid=a8hn
+###############################
+
+#JSON directory
+dir1=/esarchive/autosubmit/${expid}/tmp/$(basename ${outdir})/outputs/provenance
+++ basename /esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138
++ dir1=/esarchive/autosubmit/a8hn/tmp/ex1_4-recipe_20250211112138/outputs/provenance
+
+destdir1=/gpfs/archive/bsc32/${dir1}
++ destdir1=/gpfs/archive/bsc32//esarchive/autosubmit/a8hn/tmp/ex1_4-recipe_20250211112138/outputs/provenance
+
+#Recipes directory
+dir2=/esarchive/autosubmit/${expid}/tmp/$(basename ${outdir})/logs/recipes
+++ basename /esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138
++ dir2=/esarchive/autosubmit/a8hn/tmp/ex1_4-recipe_20250211112138/logs/recipes
+
+destdir2=/gpfs/archive/bsc32/${dir2}
++ destdir2=/gpfs/archive/bsc32//esarchive/autosubmit/a8hn/tmp/ex1_4-recipe_20250211112138/logs/recipes
+
+#Create directories and copy files
+mkdir -p ${destdir1}
++ mkdir -p /gpfs/archive/bsc32//esarchive/autosubmit/a8hn/tmp/ex1_4-recipe_20250211112138/outputs/provenance
+
+cp -r /gpfs/archive/bsc32/${outdir}/outputs/provenance/* ${destdir1}
++ cp -r /gpfs/archive/bsc32//esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138/outputs/provenance/main_provenance_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0101.json /gpfs/archive/bsc32//esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138/outputs/provenance/main_provenance_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0201.json /gpfs/archive/bsc32//esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138/outputs/provenance/main_provenance_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0301.json /gpfs/archive/bsc32//esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138/outputs/provenance/rocrate.yml /gpfs/archive/bsc32//esarchive/autosubmit/a8hn/tmp/ex1_4-recipe_20250211112138/outputs/provenance
+
+mkdir -p ${destdir2}
++ mkdir -p /gpfs/archive/bsc32//esarchive/autosubmit/a8hn/tmp/ex1_4-recipe_20250211112138/logs/recipes
+
+cp -r /gpfs/archive/bsc32/${outdir}/logs/recipes/* ${destdir2}
++ cp -r /gpfs/archive/bsc32//esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138/logs/recipes/atomic_recipe_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0101.yml /gpfs/archive/bsc32//esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138/logs/recipes/atomic_recipe_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0201.yml /gpfs/archive/bsc32//esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138/logs/recipes/atomic_recipe_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0301.yml /gpfs/archive/bsc32//esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138/logs/recipes/ex1_4-recipe.yml /gpfs/archive/bsc32//esarchive/autosubmit/a8hn/tmp/ex1_4-recipe_20250211112138/logs/recipes
+###################
+# Autosubmit tailer
+###################
+set -xuve
++ set -xuve
+echo $(date +%s) >> ${job_name_ptrn}_STAT
+++ date +%s
++ echo 1739272414
+touch ${job_name_ptrn}_COMPLETED
++ touch /gpfs/scratch/bsc32/bsc032533/a8hn/LOG_a8hn/a8hn_TRANSFER_PROVENANCE_COMPLETED
+exit 0
++ exit 0

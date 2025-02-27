@@ -1,0 +1,150 @@
+CONFIG:
+  EXPID: a8hn
+  AUTOSUBMIT_VERSION: 4.1.11
+  MAXWAITINGJOBS: 16
+  TOTALJOBS: 16
+  SAFETYSLEEPTIME: 10
+  RETRIALS: 0
+MAIL:
+  NOTIFICATIONS: 'False'
+  TO: albert.puiggros@bsc.es
+COMMUNICATIONS:
+  API: paramiko
+STORAGE:
+  TYPE: pkl
+  COPY_REMOTE_LOGS: 'True'
+DEFAULT:
+  EXPID: a8hn
+  HPCARCH: MN5
+EXPERIMENT:
+  DATELIST: '20250211'
+  MEMBERS: fc0
+  CHUNKSIZEUNIT: month
+  CHUNKSIZE: 1
+  NUMCHUNKS: 3
+  CHUNKINI: 1
+  CALENDAR: standard
+PROJECT:
+  PROJECT_TYPE: local
+  PROJECT_DESTINATION: auto-s2s
+GIT:
+  PROJECT_ORIGIN: https://earth.bsc.es/gitlab/es/auto-s2s.git
+  PROJECT_BRANCH: master
+  PROJECT_COMMIT: ''
+SVN:
+  PROJECT_URL: ''
+  PROJECT_REVISION: ''
+LOCAL:
+  PROJECT_PATH: /esarchive/scratch/apuiggro/sunset_MR/sunset
+PROJECT_FILES:
+  FILE_PROJECT_CONF: ''
+  FILE_JOBS_CONF: ''
+  JOB_SCRIPTS_TYPE: ''
+RERUN:
+  RERUN: no
+  CHUNKLIST: ''
+JOBS:
+  TRANSFER_RECIPES:
+    FILE: autosubmit/auto-transfer_recipes.sh
+    RUNNING: once
+    WALLCLOCK: 00:10
+    PLATFORM: transfer
+    NOTIFY_ON: ''
+    PROCESSORS: 1
+    TASKS: 1
+    DEPENDENCIES: {}
+    ADDITIONAL_FILES: []
+  VERIFICATION:
+    FILE: autosubmit/auto-verification.sh
+    RUNNING: chunk
+    WALLCLOCK: 03:00
+    NOTIFY_ON: ''
+    PLATFORM: mn5
+    PROCESSORS: 4
+    TASKS: 1
+    CUSTOM_DIRECTIVES: '#SBATCH --exclusive'
+    DEPENDENCIES:
+      TRANSFER_RECIPES: {}
+    ADDITIONAL_FILES: []
+  SCORECARDS:
+    FILE: autosubmit/auto-scorecards.sh
+    WALLCLOCK: 00:10
+    PLATFORM: mn5
+    NOTIFY_ON: ''
+    PROCESSORS: 1
+    TASKS: 1
+    DEPENDENCIES:
+      VERIFICATION: {}
+    ADDITIONAL_FILES: []
+  TRANSFER_RESULTS:
+    FILE: autosubmit/auto-transfer_results.sh
+    RUNNING: once
+    WALLCLOCK: 00:10
+    PLATFORM: transfer
+    NOTIFY_ON: ''
+    PROCESSORS: 1
+    TASKS: 1
+    DEPENDENCIES:
+      SCORECARDS: {}
+    ADDITIONAL_FILES: []
+  TRANSFER_PROVENANCE:
+    FILE: autosubmit/auto-transfer_provenance.sh
+    RUNNING: once
+    WALLCLOCK: 00:10
+    PLATFORM: transfer
+    NOTIFY_ON: ''
+    PROCESSORS: 1
+    TASKS: 1
+    DEPENDENCIES:
+      TRANSFER_RESULTS: {}
+    ADDITIONAL_FILES: []
+PLATFORMS:
+  MN5:
+    TYPE: slurm
+    HOST: glogin1.bsc.es
+    PROJECT: bsc32
+    USER: bsc032533
+    QUEUE: gp_bsces
+    SCRATCH_DIR: /gpfs/scratch/
+    TEMP_DIR: ''
+  TRANSFER:
+    TYPE: slurm
+    HOST: transfer2.bsc.es
+    PROJECT: bsc32
+    SCRATCH_DIR: /gpfs/scratch/
+    USER: bsc032533
+COMMON:
+  MODULES: MODULES
+  OUTDIR: /esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138
+  SCRIPT: ./use_cases/ex1_4_provenance_autosubmit/ex1_4-script.R
+  RECIPE: ex1_4-recipe.yml
+  TMPDIR: /gpfs/scratch/bsc32/bsc032533/tmp/
+ROCRATE:
+  INPUTS: []
+  OUTPUTS:
+  - '*/*.gif'
+  - file:///tmp/ex1_4-recipe_20250211112138/outputs/provenance/main_provenance_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0101.json
+  - file:///tmp/ex1_4-recipe_20250211112138/logs/recipes/atomic_recipe_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0101.yml
+  - file:///tmp/ex1_4-recipe_20250211112138/outputs/provenance/main_provenance_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0201.json
+  - file:///tmp/ex1_4-recipe_20250211112138/logs/recipes/atomic_recipe_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0201.yml
+  - file:///tmp/ex1_4-recipe_20250211112138/outputs/provenance/main_provenance_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0301.json
+  - file:///tmp/ex1_4-recipe_20250211112138/logs/recipes/atomic_recipe_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0301.yml
+  PATCH: "{\n  \"@graph\": [\n    {\n      \"@id\": \"./\",\n      \"license\": \"\
+    Apache-2.0\",\n      \"creator\": {\n        \"@id\": \"https://orcid.org/0009-0006-0707-6448\"\
+    \n      }\n    },\n    {\n      \"@id\": \"https://orcid.org/0009-0006-0707-6448\"\
+    ,\n      \"@type\": \"Person\",\n      \"affiliation\": {\n        \"@id\": \"\
+    https://ror.org/05sd8tv96\"\n      }\n    },\n    {\n      \"@id\": \"#metaclip-create-action\"\
+    ,\n      \"@type\": \"CreateAction\",\n      \"instrument\": {\n        \"@id\"\
+    : \"file:///esarchive/scratch/apuiggro/sunset_MR/sunset\"\n      },\n      \"\
+    name\": \"Compute Skills and Plot Scorecards with SUNSET +  METACLIP-based provenance\"\
+    ,\n      \"description\": \"SUNSET provenance based on METACLIP\",\n      \"isPartOf\"\
+    : {\n        \"@id\": \"#create-action\"\n      },\n      \"endTime\": \"2025-02-11
+    11:21\",\n      \"object\": [\n        {\n          \"@id\": \"/tmp/ex1_4-recipe_20250211112138/logs/recipes/atomic_recipe_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0101.yml\"\
+    \n        },\n        {\n          \"@id\": \"/tmp/ex1_4-recipe_20250211112138/logs/recipes/atomic_recipe_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0201.yml\"\
+    \n        },\n        {\n          \"@id\": \"/tmp/ex1_4-recipe_20250211112138/logs/recipes/atomic_recipe_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0301.yml\"\
+    \n        }\n      ],\n      \"result\": [\n        {\n          \"@id\": \"/tmp/ex1_4-recipe_20250211112138/outputs/provenance/main_provenance_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0101.json\"\
+    \n        },\n        {\n          \"@id\": \"/tmp/ex1_4-recipe_20250211112138/outputs/provenance/main_provenance_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0201.json\"\
+    \n        },\n        {\n          \"@id\": \"/tmp/ex1_4-recipe_20250211112138/outputs/provenance/main_provenance_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0301.json\"\
+    \n        }\n      ]\n    }\n  ]\n}"
+ROOTDIR: /esarchive/autosubmit/a8hn
+PROJDIR: /esarchive/autosubmit/a8hn/proj/auto-s2s

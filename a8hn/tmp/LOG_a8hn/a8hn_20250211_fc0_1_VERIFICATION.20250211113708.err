@@ -1,0 +1,693 @@
+[INFO] JOBID=15497749
+
+job_name_ptrn='/gpfs/scratch/bsc32/bsc032533/a8hn/LOG_a8hn/a8hn_20250211_fc0_1_VERIFICATION'
++ job_name_ptrn=/gpfs/scratch/bsc32/bsc032533/a8hn/LOG_a8hn/a8hn_20250211_fc0_1_VERIFICATION
+echo $(date +%s) > ${job_name_ptrn}_STAT
+++ date +%s
++ echo 1739270294
+
+################### 
+# AS CHECKPOINT FUNCTION
+###################
+# Creates a new checkpoint file upon call based on the current numbers of calls to the function
+
+AS_CHECKPOINT_CALLS=0
++ AS_CHECKPOINT_CALLS=0
+function as_checkpoint {
+    AS_CHECKPOINT_CALLS=$((AS_CHECKPOINT_CALLS+1))
+    touch ${job_name_ptrn}_CHECKPOINT_${AS_CHECKPOINT_CALLS}
+}
+
+###################
+# Autosubmit job
+###################
+
+#!/bin/bash
+
+############ AUTOSUBMIT INPUTS ############
+projdir=/esarchive/autosubmit/a8hn/proj/auto-s2s
++ projdir=/esarchive/autosubmit/a8hn/proj/auto-s2s
+outdir=/esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138
++ outdir=/esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138
+tmpdir=/gpfs/scratch/bsc32/bsc032533/tmp/
++ tmpdir=/gpfs/scratch/bsc32/bsc032533/tmp/
+script=./use_cases/ex1_4_provenance_autosubmit/ex1_4-script.R
++ script=./use_cases/ex1_4_provenance_autosubmit/ex1_4-script.R
+CHUNK=1
++ CHUNK=1
+###############################
+
+if [ -d $projdir ]; then
+  cd $projdir
+  srcdir=${outdir}
+else
+  cd ${tmpdir}/sunset/$(basename ${outdir})/
+  srcdir=${tmpdir}/$(basename ${outdir})
+fi
++ '[' -d /esarchive/autosubmit/a8hn/proj/auto-s2s ']'
+++ basename /esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138
++ cd /gpfs/scratch/bsc32/bsc032533/tmp//sunset/ex1_4-recipe_20250211112138/
+++ basename /esarchive/scratch/apuiggro/sunset_MR/sunset/outputs/ex1_4-recipe_20250211112138
++ srcdir=/gpfs/scratch/bsc32/bsc032533/tmp//ex1_4-recipe_20250211112138
+
+source chunk_to_recipe
++ source chunk_to_recipe
+case $CHUNK in
+  1) recipe='sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0101' ;;
+  2) recipe='sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0201' ;;
+  3) recipe='sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0301' ;;
+esac
+++ case $CHUNK in
+++ recipe=sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0101
+
+atomic_recipe=${srcdir}/logs/recipes/atomic_recipe_${recipe}.yml
++ atomic_recipe=/gpfs/scratch/bsc32/bsc032533/tmp//ex1_4-recipe_20250211112138/logs/recipes/atomic_recipe_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0101.yml
+
+set +eu
++ set +eu
+source MODULES
++ source MODULES
+#!/bin/bash
+
+  # WARNING: CDO HAS TO BE ON VERSION 1.9.4 
+  # (If not, conflicts with  weekly means computation could appear)
+
+if [[ $BSC_MACHINE == "nord3v2" ]]; then
+
+  module use /gpfs/projects/bsc32/software/suselinux/11/modules/all
+  module unuse /apps/modules/modulefiles/applications /apps/modules/modulefiles/compilers /apps/modules/modulefiles/tools /apps/modules/modulefiles/libraries /apps/modules/modulefiles/environment
+  module purge 
+
+  module load CDO/1.9.8-foss-2019b
+  module load R/4.1.2-foss-2019b
+  module load OpenMPI/4.0.5-GCC-8.3.0-nord3-v2
+  module load GEOS/3.7.2-foss-2019b-Python-3.7.4
+  module load GDAL/3.5.0-foss-2019b-Python-3.7.4
+  module load PROJ/9.0.0-GCCcore-8.3.0
+  module load Phantomjs/2.1.1
+
+elif [[ $BSC_MACHINE == "mn5" ]]; then
+
+  source /gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/etc/profile.d/conda.sh
+  conda activate /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0
+
+elif [[ $BSC_MACHINE == "amd" ]]; then
+
+  module purge
+  module load CDO/1.9.10-foss-2019b
+  module load R/4.1.2-foss-2019b
+  module load GEOS/3.7.2-foss-2019b-Python-3.7.4
+  module load GDAL/3.5.0-foss-2019b-Python-3.7.4 
+  module load PROJ/9.0.0-GCCcore-8.3.0
+  module load Phantomjs/2.1.1 
+
+elif [[ $HOSTNAME == "bsceshub02.bsc.es" ]]; then
+
+  module purge
+  module load CDO/1.9.8-foss-2021b
+  module load R/4.2.1-foss-2021b
+  module load GEOS/3.11.0-GCC-11.2.0
+  module load GDAL/3.5.2-foss-2021b-Python-3.9.6
+  module load PROJ/9.1.0-foss-2021b
+  module load Phantomjs/2.1.1
+
+else
+
+  module purge
+  module load CDO/1.9.8-foss-2015a
+  module load R/4.1.2-foss-2015a-bare
+  module load GEOS/3.7.2-foss-2015a-Python-3.7.3
+  module load GDAL/2.2.1-foss-2015a
+  module load PROJ/4.8.0-foss-2015a
+  module load Phantomjs/2.1.1
+
+fi
+++ [[ mn5 == \n\o\r\d\3\v\2 ]]
+++ [[ mn5 == \m\n\5 ]]
+++ source /gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/etc/profile.d/conda.sh
+export CONDA_EXE='/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/conda'
++++ export CONDA_EXE=/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/conda
++++ CONDA_EXE=/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/conda
+export _CE_M=''
++++ export _CE_M=
++++ _CE_M=
+export _CE_CONDA=''
++++ export _CE_CONDA=
++++ _CE_CONDA=
+export CONDA_PYTHON_EXE='/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/python'
++++ export CONDA_PYTHON_EXE=/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/python
++++ CONDA_PYTHON_EXE=/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/python
+
+# Copyright (C) 2012 Anaconda, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+
+__conda_exe() (
+    "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+)
+
+__conda_hashr() {
+    if [ -n "${ZSH_VERSION:+x}" ]; then
+        \rehash
+    elif [ -n "${POSH_VERSION:+x}" ]; then
+        :  # pass
+    else
+        \hash -r
+    fi
+}
+
+__conda_activate() {
+    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
+        # after conda updated to >= 4.4. See issue #6173.
+        PS1="$CONDA_PS1_BACKUP"
+        \unset CONDA_PS1_BACKUP
+    fi
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+__conda_reactivate() {
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix reactivate)" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+conda() {
+    \local cmd="${1-__missing__}"
+    case "$cmd" in
+        activate|deactivate)
+            __conda_activate "$@"
+            ;;
+        install|update|upgrade|remove|uninstall)
+            __conda_exe "$@" || \return
+            __conda_reactivate
+            ;;
+        *)
+            __conda_exe "$@"
+            ;;
+    esac
+}
+
+if [ -z "${CONDA_SHLVL+x}" ]; then
+    \export CONDA_SHLVL=0
+    # In dev-mode CONDA_EXE is python.exe and on Windows
+    # it is in a different relative location to condabin.
+    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+    else
+        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+    fi
+    \export PATH
+
+    # We're not allowing PS1 to be unbound. It must at least be set.
+    # However, we're not exporting it, which can cause problems when starting a second shell
+    # via a first shell (i.e. starting zsh from bash).
+    if [ -z "${PS1+x}" ]; then
+        PS1=
+    fi
+fi
++++ '[' -z '' ']'
++++ export CONDA_SHLVL=0
++++ CONDA_SHLVL=0
++++ '[' -n '' ']'
++++++ dirname /gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/conda
+++++ dirname /gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin
++++ PATH=/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/condabin:/home/bsc/bsc032533/.local/bin:/home/bsc/bsc032533/bin:/apps/modules/bsc/bin:/apps/GPP/UCX/1.15.0/INTEL/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/mpi/2021.10.0/libfabric/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/mpi/2021.10.0/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/compiler/latest/linux/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/compiler/latest/linux/bin/intel64:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
++++ export PATH
++++ '[' -z '' ']'
++++ PS1=
+++ conda activate /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0
+++ local cmd=activate
+++ case "$cmd" in
+++ __conda_activate activate /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0
+++ '[' -n '' ']'
+++ local ask_conda
++++ PS1=
++++ __conda_exe shell.posix activate /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0
++++ /gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/conda shell.posix activate /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0
+++ ask_conda='PS1='\''(/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0) '\''
+export PATH='\''/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/bin:/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/condabin:/home/bsc/bsc032533/.local/bin:/home/bsc/bsc032533/bin:/apps/modules/bsc/bin:/apps/GPP/UCX/1.15.0/INTEL/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/mpi/2021.10.0/libfabric/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/mpi/2021.10.0/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/compiler/latest/linux/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/compiler/latest/linux/bin/intel64:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin'\''
+export CONDA_PREFIX='\''/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0'\''
+export CONDA_PROMPT_MODIFIER='\''(/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0) '\''
+export CONDA_EXE='\''/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/python'\''
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/activate-r-base.sh"
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/gdal-activate.sh"
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/geotiff-activate.sh"
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/libglib_activate.sh"
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/libxml2_activate.sh"
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/magics-activate.sh"
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/proj4-activate.sh"
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/udunits2-activate.sh"'
+++ eval 'PS1='\''(/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0) '\''
+export PATH='\''/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/bin:/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/condabin:/home/bsc/bsc032533/.local/bin:/home/bsc/bsc032533/bin:/apps/modules/bsc/bin:/apps/GPP/UCX/1.15.0/INTEL/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/mpi/2021.10.0/libfabric/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/mpi/2021.10.0/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/compiler/latest/linux/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/compiler/latest/linux/bin/intel64:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin'\''
+export CONDA_PREFIX='\''/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0'\''
+export CONDA_PROMPT_MODIFIER='\''(/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0) '\''
+export CONDA_EXE='\''/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/python'\''
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/activate-r-base.sh"
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/gdal-activate.sh"
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/geotiff-activate.sh"
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/libglib_activate.sh"
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/libxml2_activate.sh"
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/magics-activate.sh"
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/proj4-activate.sh"
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/udunits2-activate.sh"'
+PS1='(/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0) '
++++ PS1='(/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0) '
+export PATH='/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/bin:/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/condabin:/home/bsc/bsc032533/.local/bin:/home/bsc/bsc032533/bin:/apps/modules/bsc/bin:/apps/GPP/UCX/1.15.0/INTEL/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/mpi/2021.10.0/libfabric/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/mpi/2021.10.0/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/compiler/latest/linux/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/compiler/latest/linux/bin/intel64:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin'
++++ export PATH=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/bin:/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/condabin:/home/bsc/bsc032533/.local/bin:/home/bsc/bsc032533/bin:/apps/modules/bsc/bin:/apps/GPP/UCX/1.15.0/INTEL/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/mpi/2021.10.0/libfabric/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/mpi/2021.10.0/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/compiler/latest/linux/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/compiler/latest/linux/bin/intel64:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
++++ PATH=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/bin:/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/condabin:/home/bsc/bsc032533/.local/bin:/home/bsc/bsc032533/bin:/apps/modules/bsc/bin:/apps/GPP/UCX/1.15.0/INTEL/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/mpi/2021.10.0/libfabric/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/mpi/2021.10.0/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/compiler/latest/linux/bin:/gpfs/apps/MN5/GPP/ONEAPI/2023.2.0/compiler/latest/linux/bin/intel64:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+export CONDA_PREFIX='/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0'
++++ export CONDA_PREFIX=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0
++++ CONDA_PREFIX=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0
+export CONDA_SHLVL='1'
++++ export CONDA_SHLVL=1
++++ CONDA_SHLVL=1
+export CONDA_DEFAULT_ENV='/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0'
++++ export CONDA_DEFAULT_ENV=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0
++++ CONDA_DEFAULT_ENV=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0
+export CONDA_PROMPT_MODIFIER='(/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0) '
++++ export 'CONDA_PROMPT_MODIFIER=(/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0) '
++++ CONDA_PROMPT_MODIFIER='(/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0) '
+export CONDA_EXE='/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/conda'
++++ export CONDA_EXE=/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/conda
++++ CONDA_EXE=/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/conda
+export _CE_M=''
++++ export _CE_M=
++++ _CE_M=
+export _CE_CONDA=''
++++ export _CE_CONDA=
++++ _CE_CONDA=
+export CONDA_PYTHON_EXE='/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/python'
++++ export CONDA_PYTHON_EXE=/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/python
++++ CONDA_PYTHON_EXE=/gpfs/projects/bsc32/software/suselinux/11/software/Miniconda3/4.7.10/bin/python
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/activate-r-base.sh"
++++ . /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/activate-r-base.sh
+#!/usr/bin/env sh
+R CMD javareconf > /dev/null 2>&1 || true
+++++ R CMD javareconf
+++++ true
+
+# store existing RSTUDIO_WHICH_R
+if [[ ! -z ${RSTUDIO_WHICH_R+x} ]]; then
+  export RSTUDIO_WHICH_R_PREV="$RSTUDIO_WHICH_R"
+fi
+++++ [[ ! -z '' ]]
+export RSTUDIO_WHICH_R="$CONDA_PREFIX/bin/R"
+++++ export RSTUDIO_WHICH_R=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/bin/R
+++++ RSTUDIO_WHICH_R=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/bin/R
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/gdal-activate.sh"
++++ . /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/gdal-activate.sh
+#!/bin/bash
+
+# Store existing GDAL env vars and set to this conda env
+# so other GDAL installs don't pollute the environment
+
+if [[ -n "$GDAL_DATA" ]]; then
+    export _CONDA_SET_GDAL_DATA="$GDAL_DATA"
+fi
+++++ [[ -n '' ]]
+
+if [[ -n "$GDAL_DRIVER_PATH" ]]; then
+    export _CONDA_SET_GDAL_DRIVER_PATH="$GDAL_DRIVER_PATH"
+fi
+++++ [[ -n '' ]]
+
+# On Linux GDAL_DATA is in $CONDA_PREFIX/share/gdal, but
+# Windows keeps it in $CONDA_PREFIX/Library/share/gdal
+if [ -d "$CONDA_PREFIX/share/gdal" ]; then
+    export GDAL_DATA="$CONDA_PREFIX/share/gdal"
+    export GDAL_DRIVER_PATH="$CONDA_PREFIX/lib/gdalplugins"
+elif [ -d "$CONDA_PREFIX/Library/share/gdal" ]; then
+    export GDAL_DATA="$CONDA_PREFIX/Library/share/gdal"
+    export GDAL_DRIVER_PATH="$CONDA_PREFIX/Library/lib/gdalplugins"
+fi
+++++ '[' -d /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/share/gdal ']'
+++++ export GDAL_DATA=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/share/gdal
+++++ GDAL_DATA=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/share/gdal
+++++ export GDAL_DRIVER_PATH=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/lib/gdalplugins
+++++ GDAL_DRIVER_PATH=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/lib/gdalplugins
+
+
+# Support plugins if the plugin directory exists
+# i.e if it has been manually created by the user
+if [[ ! -d "$GDAL_DRIVER_PATH" ]]; then
+    unset GDAL_DRIVER_PATH
+fi
+++++ [[ ! -d /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/lib/gdalplugins ]]
+
+# vsizip does not work without this.
+export CPL_ZIP_ENCODING=UTF-8
+++++ export CPL_ZIP_ENCODING=UTF-8
+++++ CPL_ZIP_ENCODING=UTF-8
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/geotiff-activate.sh"
++++ . /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/geotiff-activate.sh
+#!/bin/bash
+
+# Store existing GeoTIFF env vars and set to this conda env
+# so other GeoTIFF installs don't pollute the environment
+
+if [[ -n "$GEOTIFF_CSV" ]]; then
+    export _CONDA_SET_GEOTIFF_CSV="$GEOTIFF_CSV"
+fi
+++++ [[ -n '' ]]
+
+# On Linux GEOTIFF_CSV is in $CONDA_PREFIX/share/epsg_csv, but
+# Windows keeps it in $CONDA_PREFIX/Library/share/epsg_csv
+if [ -d $CONDA_PREFIX/share/epsg_csv ]; then
+    export GEOTIFF_CSV="$CONDA_PREFIX/share/epsg_csv"
+elif [ -d $CONDA_PREFIX/Library/share/epsg_csv ]; then
+    export GEOTIFF_CSV="$CONDA_PREFIX/Library/share/epsg_csv"
+fi
+++++ '[' -d /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/share/epsg_csv ']'
+++++ '[' -d /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/Library/share/epsg_csv ']'
+
+
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/libglib_activate.sh"
++++ . /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/libglib_activate.sh
+export GSETTINGS_SCHEMA_DIR_CONDA_BACKUP="${GSETTINGS_SCHEMA_DIR:-}"
+++++ export GSETTINGS_SCHEMA_DIR_CONDA_BACKUP=
+++++ GSETTINGS_SCHEMA_DIR_CONDA_BACKUP=
+export GSETTINGS_SCHEMA_DIR="$CONDA_PREFIX/share/glib-2.0/schemas"
+++++ export GSETTINGS_SCHEMA_DIR=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/share/glib-2.0/schemas
+++++ GSETTINGS_SCHEMA_DIR=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/share/glib-2.0/schemas
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/libxml2_activate.sh"
++++ . /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/libxml2_activate.sh
+#! /bin/sh
+
+if test -n "${XML_CATALOG_FILES:-}"; then
+    xml_catalog_files_libxml2="${XML_CATALOG_FILES}"
+    XML_CATALOG_FILES="${XML_CATALOG_FILES} "
+else
+    xml_catalog_files_libxml2=""
+    XML_CATALOG_FILES=""
+fi
+++++ test -n ''
+++++ xml_catalog_files_libxml2=
+++++ XML_CATALOG_FILES=
+
+
+# Replace space with '%20'; equivalent to
+# conda_catalog_files=${CONDA_PREFIX// /%20}, except trailing space is
+# ignored.
+conda_catalog_files=""
+++++ conda_catalog_files=
+ifs_libxml2="${IFS}"
+++++ ifs_libxml2=' 	
+'
+IFS=" "
+++++ IFS=' '
+rem="${CONDA_PREFIX}"
+++++ rem=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0
+for pre in ${rem}; do
+    while test "${rem#"${pre}"}" = "${rem}"; do
+	conda_catalog_files="${conda_catalog_files}%20"
+	rem=${rem#" "}
+    done
+    conda_catalog_files="${conda_catalog_files}${pre}"
+    rem=${rem#"${pre}"}
+done
+++++ for pre in ${rem}
+++++ test '' = /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0
+++++ conda_catalog_files=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0
+++++ rem=
+IFS="${ifs_libxml2}"
+++++ IFS=' 	
+'
+
+conda_catalog_files="file://${conda_catalog_files}/etc/xml/catalog file:///etc/xml/catalog"
+++++ conda_catalog_files='file:///gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/xml/catalog file:///etc/xml/catalog'
+export XML_CATALOG_FILES="${XML_CATALOG_FILES}${conda_catalog_files}"
+++++ export 'XML_CATALOG_FILES=file:///gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/xml/catalog file:///etc/xml/catalog'
+++++ XML_CATALOG_FILES='file:///gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/xml/catalog file:///etc/xml/catalog'
+unset conda_catalog_files ifs_libxml2 rem
+++++ unset conda_catalog_files ifs_libxml2 rem
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/magics-activate.sh"
++++ . /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/magics-activate.sh
+#!/bin/bash
+# Store existing env vars so we can restore them later
+if [ -z "$MAGPLUS_HOME" ]; then
+    export _CONDA_SET_MAGPLUS_HOME=$MAGPLUS_HOME
+fi
+++++ '[' -z '' ']'
+++++ export _CONDA_SET_MAGPLUS_HOME=
+++++ _CONDA_SET_MAGPLUS_HOME=
+
+export MAGPLUS_HOME=$CONDA_PREFIX
+++++ export MAGPLUS_HOME=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0
+++++ MAGPLUS_HOME=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/proj4-activate.sh"
++++ . /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/proj4-activate.sh
+#!/bin/sh
+
+# Store existing env vars and set to this conda env
+# so other installs don't pollute the environment.
+
+if [ -n "${PROJ_DATA:-}" ]; then
+    export _CONDA_SET_PROJ_DATA=$PROJ_DATA
+fi
+++++ '[' -n '' ']'
+
+
+if [ -d "${CONDA_PREFIX}/share/proj" ]; then
+  export "PROJ_DATA=${CONDA_PREFIX}/share/proj"
+elif [ -d "${CONDA_PREFIX}/Library/share/proj" ]; then
+  export PROJ_DATA="${CONDA_PREFIX}/Library/share/proj"
+fi
+++++ '[' -d /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/share/proj ']'
+++++ export PROJ_DATA=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/share/proj
+++++ PROJ_DATA=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/share/proj
+
+if [ -f "${CONDA_PREFIX}/share/proj/copyright_and_licenses.csv" ]; then
+  # proj-data is installed because its license was copied over
+  export PROJ_NETWORK="OFF"
+else
+  export PROJ_NETWORK="ON"
+fi
+++++ '[' -f /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/share/proj/copyright_and_licenses.csv ']'
+++++ export PROJ_NETWORK=ON
+++++ PROJ_NETWORK=ON
+. "/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/udunits2-activate.sh"
++++ . /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/etc/conda/activate.d/udunits2-activate.sh
+#!/usr/bin/env sh
+
+# Store existing env vars and set to this conda env
+# so other installs don't pollute the environment.
+
+if [ -n "${UDUNITS2_XML_PATH:-}" ]; then
+    export _CONDA_SET_UDUNITS2_XML_PATH="$UDUNITS2_XML_PATH"
+fi
+++++ '[' -n '' ']'
+
+# On Linux the share data is in $CONDA_PREFIX/share, but
+# Windows keeps it in $CONDA_PREFIX/Library/share
+if [ -d "${CONDA_PREFIX:-}/share/udunits" ]; then
+    export UDUNITS2_XML_PATH="${CONDA_PREFIX}/share/udunits/udunits2.xml"
+elif [ -d "${CONDA_PREFIX:-}/Library/share/udunits" ]; then
+    export UDUNITS2_XML_PATH="${CONDA_PREFIX}/Library/share/udunits/udunits2.xml"
+fi
+++++ '[' -d /gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/share/udunits ']'
+++++ export UDUNITS2_XML_PATH=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/share/udunits/udunits2.xml
+++++ UDUNITS2_XML_PATH=/gpfs/projects/bsc32/repository/apps/conda_envs/SUNSET-env_2.0.0/share/udunits/udunits2.xml
+++ __conda_hashr
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ hash -r
+
+set -eu
++ set -eu
+
+Rscript ${script} ${atomic_recipe}
++ Rscript ./use_cases/ex1_4_provenance_autosubmit/ex1_4-script.R /gpfs/scratch/bsc32/bsc032533/tmp//ex1_4-recipe_20250211112138/logs/recipes/atomic_recipe_sys-ECMWF-SEAS51_ref-ERA5_var-tas_reg-global_sdate-0101.yml
+
+Attaching package: 'log4r'
+
+The following object is masked from 'package:base':
+
+    debug
+
+
+Attaching package: 's2dv'
+
+The following object is masked from 'package:base':
+
+    Filter
+
+Loading required package: maps
+Loading required package: qmap
+Loading required package: fitdistrplus
+Loading required package: MASS
+Loading required package: survival
+Loading required package: easyVerification
+Loading required package: SpecsVerification
+
+Attaching package: 'SpecsVerification'
+
+The following object is masked from 'package:s2dv':
+
+    Corr
+
+
+Attaching package: 'easyVerification'
+
+The following object is masked from 'package:SpecsVerification':
+
+    EnsCorr
+
+
+Attaching package: 'lubridate'
+
+The following objects are masked from 'package:base':
+
+    date, intersect, setdiff, union
+
+
+Attaching package: 'clock'
+
+The following object is masked from 'package:lubridate':
+
+    as_date
+
+Linking to GEOS 3.11.0, GDAL 3.5.2, PROJ 9.1.0; sf_use_s2() is TRUE
+The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,
+which was just loaded, will retire in October 2023.
+Please refer to R-spatial evolution reports for details, especially
+https://r-spatial.org/r/2023/05/15/evolution4.html.
+It may be desirable to make the sf package available;
+package maintainers should consider adding sf to Suggests:.
+The sp package is now running under evolution status 2
+     (status 2 uses the sf package in place of rgdal)
+
+Attaching package: 'cowplot'
+
+The following object is masked from 'package:lubridate':
+
+    stamp
+
+
+Attaching package: 'formattable'
+
+The following object is masked from 'package:MASS':
+
+    area
+
+There were 19 warnings (use warnings() to see them)
+
+Attaching package: ‘igraph’
+
+The following object is masked from ‘package:formattable’:
+
+    normalize
+
+The following object is masked from ‘package:pryr’:
+
+    compose
+
+The following objects are masked from ‘package:lubridate’:
+
+    %--%, union
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+Warning message:
+package ‘igraph’ was built under R version 4.2.3 
+* Exploring files... This will take a variable amount of time depending
+*   on the issued request and the performance of the file server...
+* Detected dimension sizes:
+*         dat:   1
+*         var:   1
+*     var_dir:   1
+*        sday:   1
+*       sweek:   1
+*       syear:  11
+*        time:   6
+*    latitude: 180
+*   longitude: 360
+*    ensemble:  25
+* Total size of requested data:
+*   1 x 1 x 1 x 1 x 1 x 11 x 6 x 180 x 360 x 25 x 8 bytes = 815.7 Mb
+* If the size of the requested data is close to or above the free shared
+*   RAM memory, R may crash.
+* If the size of the requested data is close to or above the half of the
+*   free RAM memory, R may crash.
+* Will now proceed to read and process 11 data files:
+*   /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_19930101.nc
+*   /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_19940101.nc
+*   /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_19950101.nc
+*   /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_19960101.nc
+*   /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_19970101.nc
+*   /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_19980101.nc
+*   /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_19990101.nc
+*   /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_20000101.nc
+*   /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_20010101.nc
+*   /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_20020101.nc
+*   /gpfs/projects/bsc32/esarchive_cache/exp/ecmwf/system51c3s/monthly_mean/tas_f6h/tas_20030101.nc
+* Loading... This may take several minutes...
+* Progress: 0% + 10% + 10% + 10% + 10% + 10% + 10% + 10% + 10% + 10% + 10%
+* Successfully retrieved data.
+* Exploring files... This will take a variable amount of time depending
+*   on the issued request and the performance of the file server...
+* Detected dimension sizes:
+*         dat:   1
+*         var:   1
+*     var_dir:   1
+*        sday:   1
+*       sweek:   1
+*       syear:  11
+*        time:   6
+*    latitude: 180
+*   longitude: 360
+* Total size of requested data:
+*   1 x 1 x 1 x 1 x 1 x 11 x 6 x 180 x 360 x 8 bytes = 32.6 Mb
+* If the size of the requested data is close to or above the free shared
+*   RAM memory, R may crash.
+* If the size of the requested data is close to or above the half of the
+*   free RAM memory, R may crash.
+* Will now proceed to read and process 66 data files:
+*   The list of files is long. You can check it after Start() finishes in
+*     the output '$Files'.
+* Loading... This may take several minutes...
+* Progress: 0% + 10% + 10% + 10% + 10% + 10% + 10% + 10% + 10% + 10% + 10%
+* Successfully retrieved data.
+INFO  [2025-02-11 11:39:34] Provenance correctly generated for the Loading module
+There were 38 warnings (use warnings() to see them)
+Warning messages:
+1: In SaveExp(data = subset_metric[[i]], destination = outdir, Dates = dates,  :
+  Time steps are not equal for all start dates. Only forecast time values for the first start date will be saved correctly.
+2: In SaveExp(data = subset_metric[[i]], destination = outdir, Dates = dates,  :
+  Time steps are not equal for all start dates. Only forecast time values for the first start date will be saved correctly.
+3: In SaveExp(data = subset_metric[[i]], destination = outdir, Dates = dates,  :
+  Time steps are not equal for all start dates. Only forecast time values for the first start date will be saved correctly.
+4: In SaveExp(data = subset_metric[[i]], destination = outdir, Dates = dates,  :
+  Time steps are not equal for all start dates. Only forecast time values for the first start date will be saved correctly.
+
+###################
+# Autosubmit tailer
+###################
+set -xuve
++ set -xuve
+echo $(date +%s) >> ${job_name_ptrn}_STAT
+++ date +%s
++ echo 1739272267
+touch ${job_name_ptrn}_COMPLETED
++ touch /gpfs/scratch/bsc32/bsc032533/a8hn/LOG_a8hn/a8hn_20250211_fc0_1_VERIFICATION_COMPLETED
+exit 0
++ exit 0

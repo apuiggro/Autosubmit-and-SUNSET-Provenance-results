@@ -1,0 +1,38 @@
+[INFO] JOBID=15497751
+
+INFO  [2025-02-11 11:39:23] ##### DATA LOADING COMPLETED SUCCESSFULLY #####
+INFO  [2025-02-11 11:39:23] DATA SUMMARY:
+INFO  [2025-02-11 11:39:23] data$hcst months: March, April, May, June, July, August
+INFO  [2025-02-11 11:39:23] data$hcst range: Mar 1993 to Aug 2003
+INFO  [2025-02-11 11:39:23] data$hcst dimensions:
+INFO  [2025-02-11 11:39:23]       dat       var      sday     sweek     syear      time  latitude longitude 
+INFO  [2025-02-11 11:39:23]         1         1         1         1        11         6       180       360 
+INFO  [2025-02-11 11:39:23]  ensemble 
+INFO  [2025-02-11 11:39:23]        25 
+INFO  [2025-02-11 11:39:23] Statistical summary of the data in data$hcst:
+INFO  [2025-02-11 11:39:23] Variable: tas (units: K)
+INFO  [2025-02-11 11:39:31]    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+INFO  [2025-02-11 11:39:31]   201.9   271.8   284.2   279.3   296.4   315.1 
+INFO  [2025-02-11 11:39:31] ---------------------------------------------
+INFO  [2025-02-11 11:39:31] DATA SUMMARY:
+INFO  [2025-02-11 11:39:31] data$obs months: March, April, May, June, July, August
+INFO  [2025-02-11 11:39:31] data$obs range: Mar 1993 to Aug 2003
+INFO  [2025-02-11 11:39:31] data$obs dimensions:
+INFO  [2025-02-11 11:39:31]       dat       var      sday     sweek     syear      time  latitude longitude 
+INFO  [2025-02-11 11:39:31]         1         1         1         1        11         6       180       360 
+INFO  [2025-02-11 11:39:31]  ensemble 
+INFO  [2025-02-11 11:39:31]         1 
+INFO  [2025-02-11 11:39:31] Statistical summary of the data in data$obs:
+INFO  [2025-02-11 11:39:31] Variable: tas (units: K)
+INFO  [2025-02-11 11:39:32]    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+INFO  [2025-02-11 11:39:32]   200.9   271.8   284.8   279.2   296.7   314.7 
+INFO  [2025-02-11 11:39:32] ---------------------------------------------
+INFO  [2025-02-11 11:39:50] The anomalies have been computed, without cross-validation. The original full fields are returned as $hcst.full_val and $obs.full_val.
+INFO  [2025-02-11 11:39:50] ##### ANOMALIES COMPUTED SUCCESSFULLY #####
+INFO  [2025-02-11 12:07:38] ##### SKILL METRIC COMPUTATION COMPLETE #####
+INFO  [2025-02-11 12:07:38] ##### START SAVING SKILL METRIC #####
+INFO  [2025-02-11 12:07:42] ##### SKILL METRICS SAVED TO NETCDF FILE #####
+INFO  [2025-02-11 12:10:54] ##### STATISTICS COMPUTATION COMPLETE #####
+INFO  [2025-02-11 12:10:54] ##### START SAVING STATISTICS #####
+INFO  [2025-02-11 12:10:55] ##### STATISTICS METRICS SAVED TO NETCDF FILE #####
+INFO  [2025-02-11 12:10:59] ##### SCORECARDS METRICS SAVED TO NETCDF FILE #####
